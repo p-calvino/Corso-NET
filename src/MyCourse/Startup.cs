@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +21,16 @@ namespace Corso_NET
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // lifetime.ApplicationStarted.Register(() =>
+                // {
+                //     string filePath = Path.Combine(env.ContentRootPath, "bin/reload.txt");
+                //     File.WriteAllText(filePath, DateTime.Now.ToString());
+                // });
             }
 
             app.UseStaticFiles();
